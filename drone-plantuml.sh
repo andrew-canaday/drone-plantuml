@@ -93,11 +93,7 @@ function main() {
     cd "${PU_ROOT}"
     export VPATH="${PU_ROOT}"
     make -f "${m_file}" "$@" \
-        | cat -vte
-
-    if [ ${PIPESTATUS[0]} -ne 0 ]; then
-        err_bail "Failed to generate diagrams for ${PU_ROOT}"
-    fi
+        || err_bail "Failed to generate diagrams for ${PU_ROOT}"
 
     log_info "Done"
 }
