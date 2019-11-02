@@ -44,7 +44,7 @@ all: info ${SVG_OBJ}
 include $(DEPFILE)
 
 $(DEPFILE): $(SOURCES) $(HEADERS)
-	@echo "Generating dependencies"
+	@log_info "Generating dependencies"
 	@${__thisdir}/pu_depgen.sh ${PU_ROOT} > $(DEPFILE)
 #---------------------------------------------------------------
 
@@ -64,14 +64,14 @@ info:
 svg: $(SVG_OBJ)
 
 %.svg : %.pu
-	@echo "Rendering $< as SVG"
+	@log_info "Rendering $< as SVG"
 	@$(PLANTUML) -nometadata -tsvg $< -o "$(@D)"
 
 # PNG:
 png: $(PNG_OBJ)
 
 %.png : %.pu
-	@echo "Rendering $< as PNG"
+	@log_info "Rendering $< as PNG"
 	@$(PLANTUML) -nometadata -tpng $< -o "$(@D)"
 
 # Misc:

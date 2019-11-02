@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+
 #===============================================================================
 #
 # pu_depgen.sh: Utility script to generage GNU make depfiles from plantuml
@@ -49,16 +50,17 @@ EOF
 
 # Iterate over each dependency, generating an entry with prerequisites:
 function output_deps() {
+    log_debug "Generating \"${DEPFILE}\""
+
     local IFS=$'\n'
     for s in $(find ./ -type f -name "*.pu"); do
         __gen_deps "${s}"
     done
 
     echo -e "\n# END Auto-generated Dependencies\n"
+    log_debug "Generated dep file \"${DEPFILE}\""
 }
 
-#print_var "PWD"
-#print_var "PU_ROOT"
 
 output_deps "$@"
 
